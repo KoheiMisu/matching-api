@@ -5,7 +5,7 @@
 
     <!-- 初期設定 -->
     <target name="prepare">
-        <echo msg="コード静的解析開始...." />
+        <echo msg="static parse code ready ..." />
         <!--<mkdir dir="./build" />-->
     </target>
 
@@ -16,13 +16,8 @@
 
     <!-- コミット予定ファイルからsyntaxError検出 -->
     <target name="syntaxCheck">
-        <exec command="php syntaxCheck" logoutput="true" />
+        <exec command="vendor/bin/parallel-lint  --exclude vendor ." logoutput="true" />
     </target>
 
-    <!-- ユニットテスト実行 -->
-    <target name="phpunit">
-        <exec command="vendor/bin/phpunit" logoutput="true" />
-    </target>
-
-    <target name="build" depends="prepare, php-cs-fixer, syntaxCheck, phpunit" />
+    <target name="build" depends="prepare, php-cs-fixer, syntaxCheck" />
 </project>

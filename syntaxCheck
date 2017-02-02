@@ -1,5 +1,0 @@
-#!/usr/bin/env php
-<?php
-foreach ($changes as $file) {
-    exec('php -l '.trim($file), $results);
-}

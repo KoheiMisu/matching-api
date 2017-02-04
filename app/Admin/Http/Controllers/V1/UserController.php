@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Http\Controllers;
+namespace App\Admin\Http\Controllers\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return [2];
     }
 
     /**

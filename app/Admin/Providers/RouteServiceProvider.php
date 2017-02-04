@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Admin\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'App\Admin\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -30,23 +30,6 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     */
-    protected function mapWebRoutes()
-    {
-        Route::group([
-            'middleware' => 'web',
-            'namespace'  => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/web.php');
-        });
     }
 
     /**
@@ -59,9 +42,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::group([
             'middleware' => 'api',
             'namespace'  => $this->namespace,
-            'prefix'     => 'api',
+            'prefix'     => 'api/v1/admin',
         ], function ($router) {
-            require base_path('routes/api.php');
+            require base_path('app/Admin/routes/admin_api.php');
         });
     }
 }

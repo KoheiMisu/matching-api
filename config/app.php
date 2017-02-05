@@ -184,6 +184,7 @@ return [
         /**
          * Application
          */
+        App\Application\Providers\RouteServiceProvider::class,
 
         /*
          * l5-repository

@@ -190,7 +190,6 @@ return [
          * l5-repository
          */
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-
     ],
 
     /*

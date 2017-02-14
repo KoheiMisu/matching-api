@@ -10,7 +10,8 @@
         "prettus/l5-repository": "^2.6",
         "laravel-ja/comja5": "~1",
         "dingo/api": "1.0.x@dev",
-        "laravel/passport": "1.0.17"
+        "laravel/socialite": "2.*",
+        "tymon/jwt-auth": "^0.5.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

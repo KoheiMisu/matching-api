@@ -4,9 +4,15 @@ namespace App\Application\Http\Controllers\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use JWTAuth;
+use Illuminate\Http\JsonResponse;
+use Dingo\Api\Routing\Helpers;
+use App\Application\Transformers\UserTransformer;
 
 class UserController extends Controller
 {
+    use Helpers;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return [2];
+        //
     }
 
     /**
@@ -23,9 +29,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        return ['test' => 'tetst'];
+        //
     }
 
     /**
@@ -71,5 +77,19 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getAuthenticatedUser()
+    {
+
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['user_not_found'], 404);
+        }
+
+        // the token is valid and we have found the user via the sub claim
+        return $this->response->item($user, new UserTransformer);
     }
 }

@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', '3J1B1IrgrzzZBKnqii1Z0zeEwiHBppCg'),
+    'secret' => env('JWT_SECRET', 'MMf3E0Bz0czehHvxaR6mjSgBJglck5cX'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,9 +31,11 @@ return [
     | Specify the length of time (in minutes) that the token will be valid for.
     | Defaults to 1 hour
     |
+    | 1 week = 10080 min
+    |
     */
 
-    'ttl' => 60,
+    'ttl' => 10080,
 
     /*
     |--------------------------------------------------------------------------

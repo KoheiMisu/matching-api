@@ -11,6 +11,7 @@ use App\Application\Services\JWTAuthUtility;
 use App\Application\Transformers\UserProfileTransformer;
 use App\Application\Services\ValidateManager;
 use App\Application\Http\Validators\UserProfileValidator;
+use App\Application\Services\ModelOperator;
 
 class UserProfileController extends Controller
 {
@@ -27,22 +28,17 @@ class UserProfileController extends Controller
     }
 
     /**
-     * @param ValidateManager $validateManager
-     * @return \Dingo\Api\Http\Response
+     * @param ModelOperator $modelOperator
+     * @return mixed
      */
-    public function store(ValidateManager $validateManager)
+    public function store(ModelOperator $modelOperator)
     {
-        $data = $validateManager->validate(new UserProfileValidator());
+        $result = $modelOperator
+            ->setModel(new UserProfile())
+            ->validate(new UserProfileValidator())
+            ->save();
 
-        $userProfile = new UserProfile($data);
-
-        try {
-            $userProfile->save();
-        } catch (\Exception $e) {
-            return $this->response->array(['isSuccess' => false])->setStatusCode(500);
-        }
-
-        return $this->response->array(['name' => $userProfile->name, 'isSuccess' => true]);
+        return $this->response->array(['name' => $result->name, 'isSuccess' => true]);
     }
 
     /**
@@ -69,22 +65,16 @@ class UserProfileController extends Controller
         return $this->response->item($user->userProfile, new UserProfileTransformer);
     }
 
-    public function update(ValidateManager $validateManager, JWTAuthUtility $JWTAuthUtility)
+    public function update(ModelOperator $modelOperator, JWTAuthUtility $JWTAuthUtility)
     {
         $user = $JWTAuthUtility->getAuthenticatedUser();
 
-        $data = $validateManager->validate(new UserProfileValidator());
+        $result = $modelOperator
+            ->setModel($user->userProfile)
+            ->validate(new UserProfileValidator())
+            ->save();
 
-        $userProfile = $user->userProfile;
-
-        try {
-            $userProfile->fill($data);
-            $userProfile->save();
-        } catch (\Exception $e) {
-            return $this->response->array(['isSuccess' => false])->setStatusCode(500);
-        }
-
-        return $this->response->item($userProfile, new UserProfileTransformer);
+        return $this->response->item($result, new UserProfileTransformer);
     }
 
     /**

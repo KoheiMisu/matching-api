@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\College;
+use Illuminate\Notifications\Notifiable;
+use App\Models\Support\NotificationForSlack;
 
 class UserProfile extends Model
 {
+    use Notifiable, NotificationForSlack;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,5 +48,15 @@ class UserProfile extends Model
         }
 
         return false;
+    }
+
+    /**
+     * Slackチャンネルに対する通知をルートする
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        return config('config.ErrorOfSlackWebhookUrl');
     }
 }

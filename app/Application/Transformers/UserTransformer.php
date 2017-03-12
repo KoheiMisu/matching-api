@@ -16,8 +16,9 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         return [
+            'id' => $user->id,
             'fb_name'          => $user->fb_name,
-            'has_profile' => $user->hasProfile()
+            'hasProfile' => $user->hasProfile()
         ];
     }
 }

@@ -20,9 +20,9 @@ class UserProfileTableSeeder extends Seeder
             $name = $incrementNum . '_profile_testUser';
 
             factory(\App\Models\UserProfile::class)->create([
-                'name' => $name,
-                'college_id' => $i,
                 'user_id' => $incrementNum,
+                'college_id' => $i,
+                'name' => $name,
                 'grade' => 1,
             ]);
 

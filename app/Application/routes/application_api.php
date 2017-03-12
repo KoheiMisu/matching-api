@@ -23,4 +23,5 @@ $api->version('v1',
     function ($api) {
         $api->get('/auth/authenticated_user', 'UserController@getAuthenticatedUser');
         $api->resource('users', 'UserController');
+        $api->resource('user_profiles', 'UserProfileController');
 });

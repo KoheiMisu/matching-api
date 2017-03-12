@@ -8,6 +8,7 @@ use JWTAuth;
 use Illuminate\Http\JsonResponse;
 use Dingo\Api\Routing\Helpers;
 use App\Application\Transformers\UserTransformer;
+use App\Application\Services\JWTAuthUtility;
 
 class UserController extends Controller
 {
@@ -80,12 +81,12 @@ class UserController extends Controller
     }
 
     /**
-     * @return JsonResponse
+     * @param JWTAuthUtility $JWTAuthUtility
+     * @return \Dingo\Api\Http\Response|JsonResponse
      */
-    public function getAuthenticatedUser()
+    public function getAuthenticatedUser(JWTAuthUtility $JWTAuthUtility)
     {
-
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
+        if (!$user = $JWTAuthUtility->getAuthenticatedUser()) {
             return response()->json(['user_not_found'], 404);
         }
 

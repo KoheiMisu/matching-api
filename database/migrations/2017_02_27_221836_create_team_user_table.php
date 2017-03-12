@@ -17,6 +17,7 @@ class CreateTeamUserTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
             $table->integer('team_id')->foreign('team_id')->references('id')->on('team');
+            $table->timestamps();
         });
     }
 

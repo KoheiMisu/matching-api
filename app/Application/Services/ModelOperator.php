@@ -56,11 +56,16 @@ class ModelOperator
     /**
      * @return Model
      */
-    public function save()
+    public function operate()
     {
         try {
-            $this->model->fill($this->params);
-            $this->model->save();
+            switch (true) {
+                case $this->validateManager->getHttpMethod() === 'DELETE':
+                    $this->delete();
+                    break;
+                default:
+                    $this->save();
+            }
         } catch (QueryException $e) {
             $attachment = $this->createAttachmentOfQueryException($e);
             $this->model->notify(new SlackPosted(true, $attachment));
@@ -68,6 +73,17 @@ class ModelOperator
         }
 
         return $this->model;
+    }
+
+    private function save()
+    {
+        $this->model->fill($this->params);
+        $this->model->save();
+    }
+
+    private function delete()
+    {
+        $this->model->delete();
     }
 
     /**

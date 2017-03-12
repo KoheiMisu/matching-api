@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\UserProfile;
+use App\Models\Support\UserPolicy;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UserPolicy;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +34,14 @@ class User extends Authenticatable
     public function userProfile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    /**
+     * @return UserProfile
+     */
+    public function userPermission()
+    {
+        return $this->hasMany(UserPermission::class);
     }
 
     /**

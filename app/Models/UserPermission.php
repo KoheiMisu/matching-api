@@ -13,6 +13,16 @@ class UserPermission extends Model
 {
     use SoftDeletes, Notifiable, NotificationForSlack;
 
+    const CAPTAIN = 'captain';
+    const TEAM = 'team';
+    const SCHEDULE = 'schedule';
+
+    const TYPES = [
+        self::CAPTAIN,
+        self::TEAM,
+        self::SCHEDULE,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,17 +35,16 @@ class UserPermission extends Model
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [];
 
-    /**
-     * @return College
-     */
-    public function college()
+    public function setTeamIdAttribute($value)
     {
-        return $this->hasOne(College::class, 'id', 'college_id');
+        if (strlen($value) === 0) {
+            return null;
+        }
+
+        return $value;
     }
 }

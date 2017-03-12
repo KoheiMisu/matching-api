@@ -15,10 +15,14 @@ class ValidateManager
     /** @var  Request */
     private $request;
 
+    /** @var  string */
+    private $httpMethod;
+
     public function __construct(Factory $validatorFactory, Request $request)
     {
         $this->validator = $validatorFactory;
         $this->request = $request;
+        $this->httpMethod = head($this->request->route()->getMethods());
     }
 
 
@@ -33,5 +37,10 @@ class ValidateManager
         }
 
         return $payload;
+    }
+
+    public function getHttpMethod()
+    {
+        return $this->httpMethod;
     }
 }

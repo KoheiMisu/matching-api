@@ -3,7 +3,6 @@
 namespace App\Application\Http\Controllers\V1;
 
 use App\Application\Http\Validators\UserPermissionValidator;
-use App\Http\Controllers\Controller;
 use App\Models\UserPermission;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
@@ -42,7 +41,7 @@ class UserPermissionController extends Controller
         $result = $modelOperator
             ->setModel(new UserPermission())
             ->validate(new UserPermissionValidator())
-            ->save();
+            ->operate();
 
         return $this->response->array(['isSuccess' => true]);
     }
@@ -81,13 +80,12 @@ class UserPermissionController extends Controller
         //
     }
 
-    public function destroy($id, ModelOperator $modelOperator)
+    public function destroy(UserPermission $userPermission, ModelOperator $modelOperator)
     {
-//        $result = $modelOperator
-//            ->setModel(new UserPermission())
-//            ->validate(new UserPermissionValidator())
-//            ->delete();
-//
-//        return $this->response->array(['isSuccess' => true]);
+        $result = $modelOperator
+            ->setModel($userPermission)
+            ->operate();
+
+        return $this->response->array(['isSuccess' => true]);
     }
 }

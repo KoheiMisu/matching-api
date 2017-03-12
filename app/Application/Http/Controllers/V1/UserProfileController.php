@@ -4,7 +4,6 @@ namespace App\Application\Http\Controllers\V1;
 
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Dingo\Api\Routing\Helpers;
 use App\Application\Services\JWTAuthUtility;
@@ -36,7 +35,7 @@ class UserProfileController extends Controller
         $result = $modelOperator
             ->setModel(new UserProfile())
             ->validate(new UserProfileValidator())
-            ->save();
+            ->operate();
 
         return $this->response->array(['name' => $result->name, 'isSuccess' => true]);
     }
@@ -72,7 +71,7 @@ class UserProfileController extends Controller
         $result = $modelOperator
             ->setModel($user->userProfile)
             ->validate(new UserProfileValidator())
-            ->save();
+            ->operate();
 
         return $this->response->item($result, new UserProfileTransformer);
     }

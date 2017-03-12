@@ -11,6 +11,6 @@ trait NotificationForSlack
      */
     public function routeNotificationForSlack()
     {
-        return config('ErrorOfSlackWebhookUrl');
+        return config('config.ErrorOfSlackWebhookUrl');
     }
 }

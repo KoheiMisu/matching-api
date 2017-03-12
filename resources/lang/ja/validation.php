@@ -103,12 +103,14 @@ return [
     | The following language lines are used to swap attribute place-holders
     | with something more reader friendly such as E-Mail Address instead
     | of "email". This simply helps us make messages a little cleaner.
-    |
+    |=>
     */
     'attributes' => [
-        'user_id' => 'ユーザー情報',
+        'user_id' => 'ユーザー',
         'college_id' => '大学',
+        'team_id' => 'チーム',
         'name' => '名前',
-        'grade' => '学年'
+        'grade' => '学年',
+        'type' => '権限'
     ],
 ];

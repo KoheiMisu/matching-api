@@ -4,6 +4,7 @@ namespace App\Application\Services;
 
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Http\Request;
+
 use Illuminate\Validation\Factory;
 use App\Application\Http\Validators\Support\ValidateLogic;
 
@@ -26,6 +27,14 @@ class ValidateManager
     }
 
 
+    /**
+     *
+     *
+     * @TODO: PutなどEntityがある場合はEntityをセットしておかないと、NotBlankError等を回避できない
+     *
+     * @param ValidateLogic $validateLogic
+     * @return array
+     */
     public function validate(ValidateLogic $validateLogic)
     {
         $payload = $this->request->only($validateLogic->getValidateColumns());

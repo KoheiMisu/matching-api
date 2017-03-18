@@ -15,8 +15,11 @@ class CreateTeamTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('college_id')->foreign('college_id')->references('id')->on('college');
+            $table->string('name');
+            $table->string('profile_image_path')->nullable();
+            $table->string('gender_ratio'); //男女比
+            $table->string('drinking_ratio'); //飲み会比率
             $table->timestamps();
         });
     }

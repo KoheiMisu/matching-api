@@ -17,16 +17,6 @@ class UserProfileController extends Controller
     use Helpers;
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * @param ModelOperator $modelOperator
      * @return mixed
      */
@@ -64,7 +54,13 @@ class UserProfileController extends Controller
         return $this->response->item($user->userProfile, new UserProfileTransformer);
     }
 
-    public function update(ModelOperator $modelOperator, JWTAuthUtility $JWTAuthUtility)
+    /**
+     * @param $id
+     * @param ModelOperator $modelOperator
+     * @param JWTAuthUtility $JWTAuthUtility
+     * @return \Dingo\Api\Http\Response
+     */
+    public function update($id, ModelOperator $modelOperator, JWTAuthUtility $JWTAuthUtility)
     {
         $user = $JWTAuthUtility->getAuthenticatedUser();
 
@@ -74,16 +70,5 @@ class UserProfileController extends Controller
             ->operate();
 
         return $this->response->item($result, new UserProfileTransformer);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

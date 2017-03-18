@@ -49,14 +49,4 @@ class UserProfile extends Model
 
         return false;
     }
-
-    /**
-     * Slackチャンネルに対する通知をルートする
-     *
-     * @return string
-     */
-    public function routeNotificationForSlack()
-    {
-        return config('config.ErrorOfSlackWebhookUrl');
-    }
 }

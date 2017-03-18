@@ -69,7 +69,7 @@ class ModelOperator
         } catch (QueryException $e) {
             $attachment = $this->createAttachmentOfQueryException($e);
             $this->model->notify(new SlackPosted(true, $attachment));
-            throw new ResourceException('resource operate was failed', ['isSuccess' => false]);
+            throw new ResourceException('Resource operate was failed', ['isSuccess' => false]);
         }
 
         return $this->model;

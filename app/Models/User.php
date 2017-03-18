@@ -55,4 +55,17 @@ class User extends Authenticatable
 
         return false;
     }
+
+    /**
+     * @return UserPermission
+     */
+    public function getUserPermissionByTeam()
+    {
+        $result = $this->userPermission
+                        ->first(function ($userPermission, $key) {
+                            return ($userPermission->team_id === null && $userPermission->type === UserPermission::CAPTAIN);
+                        });
+
+        return $result;
+    }
 }

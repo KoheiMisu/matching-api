@@ -39,12 +39,42 @@ class UserPermission extends Model
      */
     protected $hidden = [];
 
+    /**
+     * @param $value
+     * @return null
+     */
     public function setTeamIdAttribute($value)
     {
-        if (strlen($value) === 0) {
+        if (empty($value)) {
             return null;
         }
 
-        return $value;
+        $this->attributes['team_id'] = $value;
     }
+
+    /**
+     * @param string $permissionType
+     * @return string
+     */
+    public static function getGatePermissionByType(string $permissionType): string
+    {
+        $gate = 'can:' . $permissionType;
+
+        return $gate;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllGatePermission(): array
+    {
+        $gates = [];
+        foreach (self::TYPES as $type) {
+            $gates[] = 'can:' . $type;
+        }
+
+        return $gates;
+    }
+
+
 }

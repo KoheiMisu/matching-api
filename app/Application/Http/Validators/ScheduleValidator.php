@@ -5,7 +5,7 @@ namespace App\Application\Http\Validators;
 use App\Application\Http\Validators\Support\ValidateLogic;
 use App\Application\Http\Validators\Support\Validator;
 
-class TeamValidator implements ValidateLogic
+class ScheduleValidator implements ValidateLogic
 {
     use Validator;
 
@@ -23,6 +23,6 @@ class TeamValidator implements ValidateLogic
 
     public function errorMessage(): string
     {
-        return 'チームの保存に失敗しました。';
+        return 'スケジュールの保存に失敗しました。';
     }
 }

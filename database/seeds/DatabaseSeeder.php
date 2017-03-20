@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use ScheduleCategoryTableSeeder as ScheduleCategory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TeamTableSeeder::class);
         $this->call(UserProfileTableSeeder::class);
         $this->call(TeamUserTableSeeder::class);
+        $this->call(ScheduleCategory::class);
     }
 }

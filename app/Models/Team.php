@@ -18,9 +18,14 @@ class Team extends Model
     protected $fillable = [
         'college_id',
         'name',
+        'practice_location',
         'profile_image_path',
-        'gender_ratio',
-        'drinking_ratio',
+        'people',
+        'practice_day_of_week',
+        'gender_ratio', // 男女比
+        'drinking_ratio', // 飲み会の頻度
+        'seriousness', //サッカー / フットサルの真剣度
+        'memo',
     ];
 
     /**
@@ -29,4 +34,12 @@ class Team extends Model
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * @return College
+     */
+    public function college()
+    {
+        return $this->hasOne(College::class, 'id', 'college_id');
+    }
 }

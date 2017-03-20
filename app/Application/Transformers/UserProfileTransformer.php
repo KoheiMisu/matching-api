@@ -18,7 +18,9 @@ class UserProfileTransformer extends TransformerAbstract
     {
         return [
             'name'          => $userProfile->name,
-            'college' => $userProfile->college->name,
+            'college' => [
+                'name' => $userProfile->college->name
+            ],
             'grade' => $userProfile->grade,
             'isFreshman' => $userProfile->isFreshman()
         ];

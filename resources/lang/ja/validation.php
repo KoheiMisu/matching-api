@@ -111,6 +111,12 @@ return [
         'team_id' => 'チーム',
         'name' => '名前',
         'grade' => '学年',
-        'type' => '権限'
+        'type' => '権限',
+        'people' => '人数',
+        'practice_location' => '権限',
+        'practice_day_of_week' => '曜日',
+        'gender_ratio' => '男女比',
+        'drinking_ratio' => '飲み会比率',
+        'seriousness' => '真剣度',
     ],
 ];

@@ -2,8 +2,10 @@
 
 namespace App\Application\Http\Controllers\V1;
 
+use App\Application\Http\Validators\TeamUserValidator;
 use App\Application\Http\Validators\TeamValidator;
 use App\Application\Http\Validators\UserPermissionValidator;
+use App\Models\TeamUser;
 use App\Models\UserPermission;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
@@ -40,6 +42,21 @@ class TeamController extends Controller
                         ->validate(new TeamValidator())
                         ->operate();
 
+            /**
+             * チーム作成者をチームと紐付ける
+             */
+            $teamUser = new TeamUser();
+            $teamUser->fill([
+                'team_id' => $team->id,
+                'user_id' => $user->id
+            ]);
+            $modelOperator
+                ->setModel($teamUser)
+                ->operate();
+
+            /**
+             * チーム作成権限を取り消す
+             */
             $userPermission = $user->getUserPermissionByTeam();
             $userPermission->fill(['team_id' => $team->id]);
             $modelOperator
@@ -56,31 +73,23 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        dd($team);
         return $this->response->item($team, new TeamTransformer);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Team $team
+     * @param ModelOperator $modelOperator
+     * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Team $team, ModelOperator $modelOperator)
     {
-        //
+        $updatedTeam = $modelOperator
+            ->setModel($team)
+            ->validate(new TeamValidator())
+            ->operate();
+
+        return $this->response->item($updatedTeam, new TeamTransformer);
     }
 
     /**

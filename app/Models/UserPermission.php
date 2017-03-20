@@ -14,7 +14,7 @@ class UserPermission extends Model
     use SoftDeletes, Notifiable, NotificationForSlack;
 
     const CAPTAIN = 'captain';
-    const TEAM = 'team';
+    const TEAM = 'team'; //副代表とか次期代表対象。チームの情報を修正できる
     const SCHEDULE = 'schedule';
 
     const TYPES = [

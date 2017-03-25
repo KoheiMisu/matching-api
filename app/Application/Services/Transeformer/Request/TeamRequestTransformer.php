@@ -12,6 +12,8 @@ class TeamRequestTransformer extends BaseTransformer implements BulkRequestInter
      */
     public function translateRequest4Bulk()
     {
-        dd($this->request->request);
+        $data = collect($this->request->get('data'));
+
+        return $data->pluck('request_id');
     }
 }

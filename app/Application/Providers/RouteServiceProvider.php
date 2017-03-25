@@ -5,6 +5,7 @@ namespace App\Application\Providers;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Request;
+use App\Application\Services\BulkOperator;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,11 +36,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function registerEntity4Bulk(string $modelKey)
     {
-        foreach (config('bulkModels') as $key => $repositoryPath) {
+        foreach (config('bulkModels') as $key => $needComponent) {
             if ($modelKey === $key) {
-                $repository = new $repositoryPath();
+                $this->app->singleton('BulkOperator', function ($app) use ($needComponent) {
+                    return new BulkOperator(
+                        $app->make($needComponent['repository']),
+                        $app->make($needComponent['transformer'])
+                    );
+                });
 
-                return app('BulkOperator')->setRepository($repository)->fetchModels();
+                return app()->make('BulkOperator')->bindModels();
             }
         }
 

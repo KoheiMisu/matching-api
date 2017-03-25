@@ -1,13 +1,24 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\UseCases;
 
-use App\Application\Services\UseCases\Support\UseCaseInterface;
+use App\Application\Services\UseCases\Support\BulkUseCaseInterface;
+use Illuminate\Http\Request;
 
-class JudgeTeamRequest implements UseCaseInterface
+class JudgeTeamRequest implements BulkUseCaseInterface
 {
-    public function execute()
+    private $request;
+
+    public function __construct(Request $request)
     {
-        // TODO: Implement execute() method.
+        $this->request = $request;
+    }
+
+    /**
+     * @return array
+     */
+    public function executeBulk(): array
+    {
+        return array_only($this->request->all(), ['team_id']);
     }
 }

@@ -2,6 +2,7 @@
 
 return [
     'bulkTeamRequest' => [
-        '' => \App\Repository\TeamRequestRepository::class,
+        'repository'  => \App\Repository\TeamRequestRepository::class,
+        'transformer' => \App\Application\Services\Transeformer\Request\TeamRequestTransformer::class,
     ],
 ];

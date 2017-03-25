@@ -2,11 +2,13 @@
 
 namespace App\Application\Http\Controllers\V1;
 
+use App\Application\Services\BulkOperator;
 use App\Application\Services\ModelOperator;
+use App\Application\Transformers\TeamRequestTransformer;
 use App\Models\TeamRequest;
 use App\Application\Http\Validators\TeamRequestValidator;
 use Dingo\Api\Routing\Helpers;
-use Illuminate\Http\Request;
+use App\Application\Services\UseCases\JudgeTeamRequest;
 
 class TeamRequestController extends Controller
 {
@@ -37,15 +39,21 @@ class TeamRequestController extends Controller
     }
 
     /**
-     * @param TeamRequest   $teamRequest
-     * @param ModelOperator $modelOperator
-     *
      * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, ModelOperator $modelOperator)
+    public function update()
     {
-        dd($request->teamRequest);
-        //return $this->response->item($updatedTeamRequest, new TeamRequestTransformer);
+        //        dd(app()->make('BulkOperator'));
+        $useCase = app()->make(JudgeTeamRequest::class);
+        $result  = app()->make('BulkOperator')->executeBulk($useCase);
+
+        dd($result);
+
+        if (!$result) {
+            return $this->response->array(['data' => []]);
+        }
+
+        return $this->response->item($result, new TeamRequestTransformer());
     }
 
     /**

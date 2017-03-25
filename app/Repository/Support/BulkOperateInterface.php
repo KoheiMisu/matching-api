@@ -13,4 +13,11 @@ interface BulkOperateInterface
      * @return Model
      */
     public function find4Bulk(Collection $collection);
+
+    /**
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function findBulkResult(array $data);
 }

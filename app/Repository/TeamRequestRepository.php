@@ -19,6 +19,11 @@ class TeamRequestRepository extends BaseRepository implements BulkOperateInterfa
 
     public function find4Bulk(Collection $collection)
     {
-        return;
+        return $this->findWhereIn('id', $collection->all());
+    }
+
+    public function findBulkResult(array $data)
+    {
+        return $this->findWhere(['team_id' => $data['team_id']]);
     }
 }

@@ -8,18 +8,21 @@
 
 namespace App\Models;
 
-use Reliese\Coders\Model\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use App\Models\Support\NotificationForSlack;
 
 class RequestHistory extends Model
 {
+    use Notifiable, NotificationForSlack;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'team_id',
-        'user_id',
+        'request_id',
         'result',
     ];
 

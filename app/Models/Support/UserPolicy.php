@@ -7,6 +7,8 @@ use App\Models\UserPermission;
 trait UserPolicy
 {
     /**
+     * @Todo 多分team_idと照合しないとセキュリティ的に危ない
+     *
      * @param string $type
      *
      * @return bool

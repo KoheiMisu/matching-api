@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(TeamRequest::class);
     }
 
+    public function teamUser()
+    {
+        return $this->hasMany(TeamUser::class);
+    }
+
     /**
      * @return bool
      */

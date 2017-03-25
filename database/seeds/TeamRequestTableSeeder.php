@@ -18,5 +18,10 @@ class TeamRequestTableSeeder extends Seeder
             'user_id' => 2,
             'team_id' => 1,
         ]);
+
+        factory(\App\Models\TeamRequest::class)->create([
+            'user_id' => 3,
+            'team_id' => 1,
+        ]);
     }
 }

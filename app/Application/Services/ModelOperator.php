@@ -67,7 +67,7 @@ class ModelOperator
                     $this->save();
             }
         } catch (QueryException $e) {
-            $attachment = $this->createAttachmentOfQueryException($e);
+            $attachment = $this->model->createAttachmentOfQueryException($e);
             $this->model->notify(new SlackPosted(true, $attachment));
             throw new ResourceException('Resource operate was failed', ['isSuccess' => false]);
         }
@@ -84,20 +84,5 @@ class ModelOperator
     private function delete()
     {
         $this->model->delete();
-    }
-
-    /**
-     * @param QueryException $e
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private function createAttachmentOfQueryException(QueryException $e)
-    {
-        $attachment = collect([]);
-
-        $attachment
-            ->put('message', $e->getMessage());
-
-        return $attachment;
     }
 }

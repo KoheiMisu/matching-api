@@ -6,6 +6,7 @@ use App\Application\Services\Transeformer\Support\BulkRequestInterface;
 use App\Repository\Support\BulkOperateInterface;
 use App\Application\Services\UseCases\Support\BulkUseCaseInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class BulkOperator
 {
@@ -60,7 +61,7 @@ class BulkOperator
     /**
      * @param BulkUseCaseInterface $useCase
      *
-     * @return Model
+     * @return Collection
      */
     public function executeBulk(BulkUseCaseInterface $useCase)
     {

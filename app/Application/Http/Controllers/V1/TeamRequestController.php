@@ -2,9 +2,7 @@
 
 namespace App\Application\Http\Controllers\V1;
 
-use App\Application\Services\BulkOperator;
 use App\Application\Services\ModelOperator;
-use App\Application\Transformers\TeamRequestTransformer;
 use App\Models\TeamRequest;
 use App\Application\Http\Validators\TeamRequestValidator;
 use Dingo\Api\Routing\Helpers;
@@ -43,17 +41,28 @@ class TeamRequestController extends Controller
      */
     public function update()
     {
-        //        dd(app()->make('BulkOperator'));
         $useCase = app()->make(JudgeTeamRequest::class);
         $result  = app()->make('BulkOperator')->executeBulk($useCase);
-
-        dd($result);
 
         if (!$result) {
             return $this->response->array(['data' => []]);
         }
 
-        return $this->response->item($result, new TeamRequestTransformer());
+        $response = [];
+
+        foreach ($result as $item) {
+            /*
+             * @Todo user_profile入力をシステムで必須にした場合
+             *       $item->user->userProfile->nameにする
+             */
+            $response['data'][] = [
+                'user' => [
+                    'name' => $item->user->fb_name,
+                ],
+            ];
+        }
+
+        return response()->json($response);
     }
 
     /**

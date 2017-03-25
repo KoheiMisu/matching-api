@@ -32,4 +32,12 @@ class TeamRequest extends Model
     protected $dates = [
         'created_at',
     ];
+
+    /**
+     * @return User
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

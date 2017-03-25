@@ -13,7 +13,8 @@ class CreateRequestHistoryTable extends Migration
     {
         Schema::create('request_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('request_id')->foreign('request_id')->references('id')->on('team_requests');
+            $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
+            $table->integer('team_id')->foreign('team_id')->references('id')->on('teams');
             $table->enum('result', ['approval', 'rejection'])->comment('申請結果');
             $table->timestamps();
         });

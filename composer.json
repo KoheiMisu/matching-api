@@ -27,7 +27,9 @@
         "fabpot/php-cs-fixer": "1.*",
         "jakub-onderka/php-parallel-lint": "^0.9.2",
         "way/generators": "dev-feature/laravel-five-stable",
-        "xethron/migrations-generator": "^2.0"
+        "xethron/migrations-generator": "^2.0",
+        "ignasbernotas/laravel-model-generator": "^1.2",
+        "reliese/laravel": "^0.0.13"
     },
     "autoload": {
         "classmap": [

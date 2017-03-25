@@ -6,7 +6,7 @@ trait Validator
 {
     /**
      * requestパラメータから取り出したいカラムを
-     * カンマ区切りで返す
+     * カンマ区切りで返す.
      *
      * @return array
      */

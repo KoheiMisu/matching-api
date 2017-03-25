@@ -118,5 +118,12 @@ return [
         'gender_ratio' => '男女比',
         'drinking_ratio' => '飲み会比率',
         'seriousness' => '真剣度',
+        'profile_image_path' => 'プロフィール画像',
+        'start_time' => '開始日時',
+        'end_time' => '終了日時',
+        'location' => '場所',
+        'scope' => '公開範囲',
+        'category_id' => 'カテゴリー',
+
     ],
 ];

@@ -3,27 +3,25 @@
 namespace App\Application\Services;
 
 use App\Application\Http\Validators\Support\ValidateLogic;
-use App\Application\Services\ValidateManager;
 use Illuminate\Database\Eloquent\Model;
 use Dingo\Api\Exception\ResourceException;
-use Dingo\Api\Exception\StoreResourceFailedException;
-use Dingo\Api\Exception\UpdateResourceFailedException;
 use Illuminate\Database\QueryException;
 use App\Notifications\SlackPosted;
 
 class ModelOperator
 {
-    /** @var ValidateManager  */
+    /** @var ValidateManager */
     private $validateManager;
 
     /** @var Model */
     private $model;
 
-    /** @var  array */
+    /** @var array */
     private $params;
 
     /**
      * ModelOperator constructor.
+     *
      * @param \App\Application\Services\ValidateManager $validateManager
      */
     public function __construct(ValidateManager $validateManager)
@@ -33,6 +31,7 @@ class ModelOperator
 
     /**
      * @param ValidateLogic $validateLogic
+     *
      * @return $this
      */
     public function validate(ValidateLogic $validateLogic)
@@ -44,6 +43,7 @@ class ModelOperator
 
     /**
      * @param Model $model
+     *
      * @return $this
      */
     public function setModel(Model $model)
@@ -88,6 +88,7 @@ class ModelOperator
 
     /**
      * @param QueryException $e
+     *
      * @return \Illuminate\Support\Collection
      */
     private function createAttachmentOfQueryException(QueryException $e)

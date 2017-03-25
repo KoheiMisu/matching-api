@@ -3,26 +3,26 @@
 namespace App\Application\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Models\User;
 use App\Models\UserProfile;
 
 class UserProfileTransformer extends TransformerAbstract
 {
     /**
-     * Turn this item object into a generic array
+     * Turn this item object into a generic array.
      *
      * @param UserProfile $userProfile
+     *
      * @return array
      */
     public function transform(UserProfile $userProfile)
     {
         return [
-            'name'          => $userProfile->name,
+            'name'    => $userProfile->name,
             'college' => [
-                'name' => $userProfile->college->name
+                'name' => $userProfile->college->name,
             ],
-            'grade' => $userProfile->grade,
-            'isFreshman' => $userProfile->isFreshman()
+            'grade'      => $userProfile->grade,
+            'isFreshman' => $userProfile->isFreshman(),
         ];
     }
 }

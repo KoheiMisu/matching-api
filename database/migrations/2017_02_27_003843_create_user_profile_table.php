@@ -8,16 +8,14 @@ class CreateUserProfileTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('user_id')->foreign('user_id')->references('id')->on('user');
-            $table->integer('college_id')->foreign('college_id')->references('id')->on('college');
+            $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
+            $table->integer('college_id')->foreign('college_id')->references('id')->on('colleges');
             $table->tinyInteger('grade');
             $table->timestamps();
             $table->unique(['user_id', 'college_id'], 'college_user_name');
@@ -26,8 +24,6 @@ class CreateUserProfileTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

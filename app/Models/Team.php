@@ -42,4 +42,12 @@ class Team extends Model
     {
         return $this->hasOne(College::class, 'id', 'college_id');
     }
+
+    /**
+     * @return Schedule
+     */
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

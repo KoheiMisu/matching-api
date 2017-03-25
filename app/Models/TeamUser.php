@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TeamUser extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -23,5 +22,4 @@ class TeamUser extends Model
      * @var array
      */
     protected $hidden = [];
-
 }

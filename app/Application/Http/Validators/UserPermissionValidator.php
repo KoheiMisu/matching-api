@@ -12,7 +12,7 @@ class UserPermissionValidator implements ValidateLogic
     const RULES = [
         'user_id' => ['required', 'exists:users,id'],
         'team_id' => ['sometimes', 'exists:teams,id'],
-        'type' => ['required', 'in:captain,team,schedule'],
+        'type'    => ['required', 'in:captain,team,schedule'],
     ];
 
     public function errorMessage(): string

@@ -10,10 +10,10 @@ class UserProfileValidator implements ValidateLogic
     use Validator;
 
     const RULES = [
-        'user_id' => ['required', 'exists:users,id'],
+        'user_id'    => ['required', 'exists:users,id'],
         'college_id' => ['required', 'exists:colleges,id'],
-        'name' => ['required', 'max:255'],
-        'grade' => ['required', 'in:1,2,3,4']
+        'name'       => ['required', 'max:255'],
+        'grade'      => ['required', 'in:1,2,3,4'],
     ];
 
     public function errorMessage(): string

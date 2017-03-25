@@ -4,33 +4,32 @@ namespace App\Application\Services;
 
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Http\Request;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Factory;
 use App\Application\Http\Validators\Support\ValidateLogic;
 
 class ValidateManager
 {
-    /** @var Factory  */
+    /** @var Factory */
     private $validator;
 
-    /** @var  Request */
+    /** @var Request */
     private $request;
 
-    /** @var  string */
+    /** @var string */
     private $httpMethod;
 
     public function __construct(Factory $validatorFactory, Request $request)
     {
-        $this->validator = $validatorFactory;
-        $this->request = $request;
+        $this->validator  = $validatorFactory;
+        $this->request    = $request;
         $this->httpMethod = head($this->request->route()->getMethods());
     }
-
 
     /**
      * @TODO: PutなどEntityがある場合はEntityをセットしておかないと、NotBlankError等を回避できない
      *
      * @param ValidateLogic $validateLogic
+     *
      * @return array
      */
     public function validate(ValidateLogic $validateLogic)

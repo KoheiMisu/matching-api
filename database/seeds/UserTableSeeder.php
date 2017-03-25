@@ -12,48 +12,45 @@ class UserTableSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
         $incrementNum = 1;
 
-        /**
+        /*
          * 新入生
          */
-        for ($i = 1; $i <= self::NEW_USER_LIMIT; $i++) {
-            $fbName = $incrementNum . '_testUser';
-            $fbId = $incrementNum . '_testUser';
+        for ($i = 1; $i <= self::NEW_USER_LIMIT; ++$i) {
+            $fbName = $incrementNum.'_testUser';
+            $fbId   = $incrementNum.'_testUser';
 
             factory(\App\Models\User::class)->create([
                 'fb_name' => $fbName,
-                'fb_id' => $fbId,
+                'fb_id'   => $fbId,
             ]);
-            $incrementNum++;
+            ++$incrementNum;
         }
 
-        /**
+        /*
          * 通常ユーザー
          */
-        for ($i = 1; $i <= self::NORMAL_USER_LIMIT; $i++) {
-            $fbName = $incrementNum . '_testUser';
-            $fbId = $incrementNum . '_testUser';
+        for ($i = 1; $i <= self::NORMAL_USER_LIMIT; ++$i) {
+            $fbName = $incrementNum.'_testUser';
+            $fbId   = $incrementNum.'_testUser';
 
             factory(\App\Models\User::class)->create([
                 'fb_name' => $fbName,
-                'fb_id' => $fbId,
+                'fb_id'   => $fbId,
             ]);
-            $incrementNum++;
+            ++$incrementNum;
         }
 
-        /**
+        /*
          * プロフィールのないユーザー
          */
         factory(\App\Models\User::class)->create([
             'fb_name' => 'not_profileUSer',
-            'fb_id' => 'not_profileUSer',
+            'fb_id'   => 'not_profileUSer',
         ]);
     }
-
 }

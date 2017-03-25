@@ -5,7 +5,7 @@ namespace App\Models\Support;
 trait NotificationForSlack
 {
     /**
-     * Slackチャンネルに対する通知をルートする
+     * Slackチャンネルに対する通知をルートする.
      *
      * @return string
      */

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\College;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Support\NotificationForSlack;
 
@@ -20,7 +19,7 @@ class UserProfile extends Model
         'user_id',
         'college_id',
         'name',
-        'grade'
+        'grade',
     ];
 
     /**
@@ -39,7 +38,7 @@ class UserProfile extends Model
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isFreshman(): bool
     {

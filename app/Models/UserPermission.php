@@ -5,16 +5,14 @@ namespace App\Models;
 use App\Models\Support\NotificationForSlack;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\User;
-use App\Models\Team;
 use Illuminate\Notifications\Notifiable;
 
 class UserPermission extends Model
 {
     use SoftDeletes, Notifiable, NotificationForSlack;
 
-    const CAPTAIN = 'captain';
-    const TEAM = 'team'; //副代表とか次期代表対象。チームの情報を修正できる
+    const CAPTAIN  = 'captain';
+    const TEAM     = 'team'; //副代表とか次期代表対象。チームの情報を修正できる
     const SCHEDULE = 'schedule';
 
     const TYPES = [
@@ -31,7 +29,7 @@ class UserPermission extends Model
     protected $fillable = [
         'user_id',
         'team_id',
-        'type'
+        'type',
     ];
 
     /**
@@ -41,7 +39,6 @@ class UserPermission extends Model
 
     /**
      * @param $value
-     * @return null
      */
     public function setTeamIdAttribute($value)
     {
@@ -54,11 +51,12 @@ class UserPermission extends Model
 
     /**
      * @param string $permissionType
+     *
      * @return string
      */
     public static function getGatePermissionByType(string $permissionType): string
     {
-        $gate = 'can:' . $permissionType;
+        $gate = 'can:'.$permissionType;
 
         return $gate;
     }
@@ -70,11 +68,9 @@ class UserPermission extends Model
     {
         $gates = [];
         foreach (self::TYPES as $type) {
-            $gates[] = 'can:' . $type;
+            $gates[] = 'can:'.$type;
         }
 
         return $gates;
     }
-
-
 }

@@ -8,32 +8,33 @@ use App\Models\User;
 class UserTransformer extends TransformerAbstract
 {
     /**
-     * Turn this item object into a generic array
+     * Turn this item object into a generic array.
      *
      * @param User $user
+     *
      * @return array
      */
     public function transform(User $user)
     {
         if (!$user->hasProfile()) {
             return [
-                'userId' => $user->id,
-                'fb_name'          => $user->fb_name,
-                'profile' => null
+                'userId'  => $user->id,
+                'fb_name' => $user->fb_name,
+                'profile' => null,
             ];
         }
 
         return [
-            'userId' => $user->id,
-            'fbName'          => $user->fb_name,
+            'userId'     => $user->id,
+            'fbName'     => $user->fb_name,
             'hasProfile' => $user->hasProfile(),
-            'profile' => [
-                'name' => $user->userProfile->name,
+            'profile'    => [
+                'name'    => $user->userProfile->name,
                 'college' => [
-                    'name' => $user->userProfile->college->name
+                    'name' => $user->userProfile->college->name,
                 ],
-                'grade' => $user->userProfile->grade
-            ]
+                'grade' => $user->userProfile->grade,
+            ],
         ];
     }
 }

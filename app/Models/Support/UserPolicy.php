@@ -8,6 +8,7 @@ trait UserPolicy
 {
     /**
      * @param string $type
+     *
      * @return bool
      */
     public function judgeType(string $type): bool

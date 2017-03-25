@@ -5,14 +5,11 @@ use Illuminate\Database\Seeder;
 class CollegeTableSeeder extends Seeder
 {
     const COLLEGES = [
-        '東京大学', '青山学院大学', '北海道大学'
+        '東京大学', '青山学院大学', '北海道大学',
     ];
-
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {

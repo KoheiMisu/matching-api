@@ -8,14 +8,12 @@ class CreateTeamTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('college_id')->foreign('college_id')->references('id')->on('college');
+            $table->integer('college_id')->foreign('college_id')->references('id')->on('colleges');
             $table->string('name');
             $table->string('practice_location');
             $table->integer('people')->comment('人数');
@@ -31,8 +29,6 @@ class CreateTeamTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

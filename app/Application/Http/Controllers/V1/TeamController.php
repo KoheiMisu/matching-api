@@ -2,18 +2,13 @@
 
 namespace App\Application\Http\Controllers\V1;
 
-use App\Application\Http\Validators\TeamUserValidator;
 use App\Application\Http\Validators\TeamValidator;
-use App\Application\Http\Validators\UserPermissionValidator;
 use App\Models\TeamUser;
-use App\Models\UserPermission;
 use Dingo\Api\Routing\Helpers;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Application\Services\JWTAuthUtility;
 use App\Application\Services\ModelOperator;
 use DB;
-use Log;
 use App\Models\Team;
 use App\Application\Transformers\TeamTransformer;
 
@@ -28,7 +23,6 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
     }
 
     public function store(JWTAuthUtility $JWTAuthUtility, ModelOperator $modelOperator)
@@ -43,19 +37,19 @@ class TeamController extends Controller
                         ->operate();
 
             /**
-             * チーム作成者をチームと紐付ける
+             * チーム作成者をチームと紐付ける.
              */
             $teamUser = new TeamUser();
             $teamUser->fill([
                 'team_id' => $team->id,
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]);
             $modelOperator
                 ->setModel($teamUser)
                 ->operate();
 
             /**
-             * チーム作成権限を取り消す
+             * チーム作成権限を取り消す.
              */
             $userPermission = $user->getUserPermissionByTeam();
             $userPermission->fill(['team_id' => $team->id]);
@@ -69,17 +63,18 @@ class TeamController extends Controller
 
     /**
      * @param Team $team
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function show(Team $team)
     {
-        return $this->response->item($team, new TeamTransformer);
+        return $this->response->item($team, new TeamTransformer());
     }
 
-
     /**
-     * @param Team $team
+     * @param Team          $team
      * @param ModelOperator $modelOperator
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function update(Team $team, ModelOperator $modelOperator)
@@ -89,17 +84,17 @@ class TeamController extends Controller
             ->validate(new TeamValidator())
             ->operate();
 
-        return $this->response->item($updatedTeam, new TeamTransformer);
+        return $this->response->item($updatedTeam, new TeamTransformer());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
     }
 }

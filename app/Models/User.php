@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\UserProfile;
 use App\Models\Support\UserPolicy;
 
 class User extends Authenticatable
@@ -18,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fb_name',
-        'fb_id'
+        'fb_id',
     ];
 
     /**
@@ -45,7 +44,15 @@ class User extends Authenticatable
     }
 
     /**
-     * @return boolean
+     * @return TeamRequest
+     */
+    public function teamRequest()
+    {
+        return $this->hasMany(TeamRequest::class);
+    }
+
+    /**
+     * @return bool
      */
     public function hasProfile(): bool
     {
@@ -63,7 +70,7 @@ class User extends Authenticatable
     {
         $result = $this->userPermission
                         ->first(function ($userPermission, $key) {
-                            return ($userPermission->team_id === null && $userPermission->type === UserPermission::CAPTAIN);
+                            return $userPermission->team_id === null && $userPermission->type === UserPermission::CAPTAIN;
                         });
 
         return $result;

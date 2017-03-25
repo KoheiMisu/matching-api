@@ -14,6 +14,7 @@ class UserPermissionController extends Controller
 
     /**
      * @param ModelOperator $modelOperator
+     *
      * @return mixed
      */
     public function store(ModelOperator $modelOperator)
@@ -29,18 +30,18 @@ class UserPermissionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     public function destroy(UserPermission $userPermission, ModelOperator $modelOperator)
     {
-        $result = $modelOperator
+        $modelOperator
             ->setModel($userPermission)
             ->operate();
 

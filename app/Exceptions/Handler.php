@@ -34,7 +34,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-//        dd($exception);
+        //        dd($exception);
         parent::report($exception);
     }
 
@@ -50,9 +50,9 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof TokenExpiredException) {
             return response()->json(['token_expired'], $exception->getStatusCode());
-        } else if ($exception instanceof TokenInvalidException) {
+        } elseif ($exception instanceof TokenInvalidException) {
             return response()->json(['token_invalid'], $exception->getStatusCode());
-        } else if ($exception instanceof JWTException) {
+        } elseif ($exception instanceof JWTException) {
             return response()->json(['token_absent'], $exception->getStatusCode());
         }
 

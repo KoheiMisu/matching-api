@@ -15,6 +15,7 @@ class AuthController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function storeFbUserData(Request $request)
@@ -22,18 +23,19 @@ class AuthController extends Controller
         //念のため必須バリデーションくらい記述
         $this->validate($request, [
             'fb_name' => 'required',
-            'fb_id' => 'required'
+            'fb_id'   => 'required',
         ]);
 
         /**
          * fb_idに紐づくuserが既に存在している場合
-         * 保存処理は行わない(再ログインの場合など)
+         * 保存処理は行わない(再ログインの場合など).
          */
         $storedUser = User::where('fb_id', $request->get('fb_id'))->first();
 
         if ($storedUser !== null) {
             //JWT Tokenを返却
             $token = JWTAuth::fromUser($storedUser);
+
             return response()->json(compact('token'));
         }
 
@@ -44,12 +46,12 @@ class AuthController extends Controller
              */
 
             /**
-             * 新規ユーザーを保存
+             * 新規ユーザーを保存.
              */
             $user = new User($request->all());
 
             if (!$user->save()) {
-                /**
+                /*
                  * @Todo ログ保存を後に実装(Mongoかファイルベースか)
                  */
                 return response()->json(['error' => 'user save error'], 500);
@@ -57,6 +59,7 @@ class AuthController extends Controller
 
             //JWT Tokenを返却
             $token = JWTAuth::fromUser($user);
+
             return response()->json(compact('token'));
         }
     }
@@ -64,16 +67,15 @@ class AuthController extends Controller
     /**
      * Log out
      * Invalidate the token, so user cannot use it anymore
-     * They have to re-login to get a new token
+     * They have to re-login to get a new token.
      *
      * @param Request $request
      */
     public function logout(Request $request)
     {
         $this->validate($request, [
-            'token' => 'required'
+            'token' => 'required',
         ]);
         JWTAuth::invalidate($request->input('token'));
     }
-
 }

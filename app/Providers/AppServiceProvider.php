@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Reliese\Coders\CodersServiceProvider;
+use Dingo\Api\Transformer\Adapter\Fractal;
+use League\Fractal\Manager;
+use App\Application\Http\Serializers\CustomJsonSerializer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,6 +14,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app['Dingo\Api\Transformer\Factory']->setAdapter(function ($app) {
+            $fractal = new Manager();
+            $fractal->setSerializer(new CustomJsonSerializer());
+
+            return new Fractal($fractal);
+        });
     }
 
     /**
@@ -19,8 +27,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment() == 'local') {
-            $this->app->register(CodersServiceProvider::class);
-        }
     }
 }

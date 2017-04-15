@@ -13,3 +13,5 @@ workspace.xml
 Thumbs.db
 *.iws
 !.gitkeep
+public/swagger-ui/*
+

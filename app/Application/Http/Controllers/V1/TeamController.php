@@ -12,6 +12,10 @@ use DB;
 use App\Models\Team;
 use App\Application\Transformers\TeamTransformer;
 
+/**
+ * Class TeamController
+ * @package App\Application\Http\Controllers\V1
+ */
 class TeamController extends Controller
 {
     use Helpers;

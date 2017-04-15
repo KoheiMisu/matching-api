@@ -9,6 +9,10 @@ use App\Application\Transformers\UserProfileTransformer;
 use App\Application\Http\Validators\UserProfileValidator;
 use App\Application\Services\ModelOperator;
 
+/**
+ * Class UserProfileController
+ * @package App\Application\Http\Controllers\V1
+ */
 class UserProfileController extends Controller
 {
     use Helpers;
@@ -29,6 +33,8 @@ class UserProfileController extends Controller
     }
 
     /**
+     * @api {get} /user_profiles/:id Get UserProfile information
+     *
      * @param int            $id             userId
      * @param JWTAuthUtility $JWTAuthUtility
      *

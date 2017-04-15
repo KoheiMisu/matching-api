@@ -18,6 +18,32 @@ class UserProfileController extends Controller
     use Helpers;
 
     /**
+     * @SWG\Post(
+     *     path="/user_profiles/",
+     *     description="user_profileを取得",
+     *     produces={"application/json"},
+     *     tags={"user_profiles"},
+     *     @SWG\Parameter(
+     *         name="user_profiles_id",
+     *         description="user_profilesのID",
+     *         in="path",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success"
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Parameter error"
+     *     ),
+     *     @SWG\Response(
+     *         response=403,
+     *         description="Auth error",
+     *     ),
+     * )
+     *
      * @param ModelOperator $modelOperator
      *
      * @return mixed
@@ -33,7 +59,31 @@ class UserProfileController extends Controller
     }
 
     /**
-     * @api {get} /user_profiles/:id Get UserProfile information
+     * @SWG\Get(
+     *     path="/user_profiles/{user_profiles_id}",
+     *     description="user_profileを取得",
+     *     produces={"application/json"},
+     *     tags={"user_profiles"},
+     *     @SWG\Parameter(
+     *         name="user_profiles_id",
+     *         description="user_profilesのID",
+     *         in="path",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success"
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Parameter error"
+     *     ),
+     *     @SWG\Response(
+     *         response=403,
+     *         description="Auth error",
+     *     ),
+     * )
      *
      * @param int            $id             userId
      * @param JWTAuthUtility $JWTAuthUtility

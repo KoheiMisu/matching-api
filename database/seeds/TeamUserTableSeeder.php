@@ -13,5 +13,10 @@ class TeamUserTableSeeder extends Seeder
             'user_id' => 1,
             'team_id' => 1,
         ]);
+
+        factory(\App\Models\TeamUser::class)->create([
+            'user_id' => 1,
+            'team_id' => 2,
+        ]);
     }
 }

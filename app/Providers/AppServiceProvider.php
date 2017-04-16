@@ -27,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        foreach (config('repositories') as $repository) {
+            $this->app->singleton($repository);
+        }
     }
 }

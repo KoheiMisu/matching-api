@@ -80,4 +80,9 @@ class User extends Authenticatable
 
         return $result;
     }
+
+    public function getBelongsToTeamId()
+    {
+        return $this->teamUser->pluck('team_id');
+    }
 }

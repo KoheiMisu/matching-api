@@ -10,8 +10,7 @@ use App\Application\Http\Validators\UserProfileValidator;
 use App\Application\Services\ModelOperator;
 
 /**
- * Class UserProfileController
- * @package App\Application\Http\Controllers\V1
+ * Class UserProfileController.
  */
 class UserProfileController extends Controller
 {

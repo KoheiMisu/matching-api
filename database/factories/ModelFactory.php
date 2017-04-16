@@ -18,6 +18,7 @@ use App\Models\TeamUser;
 use App\Models\ScheduleCategory;
 use App\Models\UserPermission;
 use App\Models\TeamRequest;
+use App\Models\Schedule;
 
 /*
  * @return \App\Models\User
@@ -73,4 +74,20 @@ $factory->define(ScheduleCategory::class, function (Faker\Generator $faker) {
  */
 $factory->define(TeamRequest::class, function (Faker\Generator $faker) {
     return [];
+});
+
+/*
+ * @return Schedule
+ */
+$factory->define(Schedule::class, function (Faker\Generator $faker) {
+    return [
+        'team_id'              => '',
+        'category_id'          => 1,
+        'memo'                 => $faker->paragraph(),
+        'scope'                => 'open',
+        'location'             => $faker->address,
+        'start_time'           => $faker->date('Y-m-d h:i:s'),
+        'end_time'             => $faker->date('Y-m-d h:i:s'),
+        'last_updated_user_id' => 1,
+    ];
 });

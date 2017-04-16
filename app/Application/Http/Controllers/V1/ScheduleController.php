@@ -3,23 +3,30 @@
 namespace App\Application\Http\Controllers\V1;
 
 use App\Application\Http\Validators\ScheduleValidator;
+use App\Repository\ScheduleRepository;
 use Dingo\Api\Routing\Helpers;
 use App\Application\Services\JWTAuthUtility;
 use App\Application\Services\ModelOperator;
 use App\Models\Schedule;
 use App\Application\Transformers\ScheduleTransformer;
+use Illuminate\Support\Collection;
 
 class ScheduleController extends Controller
 {
     use Helpers;
 
     /**
-     * Display a listing of the resource.
+     * ユーザが登録されているチームの予定を全て表示.
+     *
+     * @param JWTAuthUtility $JWTAuthUtility
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(JWTAuthUtility $JWTAuthUtility)
     {
+        $schedules = app(ScheduleRepository::class)->findByUserBelongsToTeam($JWTAuthUtility->getUserBelongsToTeamIds());
+
+        return $this->response->collection($schedules, new ScheduleTransformer());
     }
 
     /**

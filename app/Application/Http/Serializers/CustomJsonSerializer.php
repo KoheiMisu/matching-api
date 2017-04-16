@@ -2,11 +2,7 @@
 
 namespace App\Application\Http\Serializers;
 
-use League\Fractal\Pagination\CursorInterface;
-use League\Fractal\Pagination\PaginatorInterface;
-use League\Fractal\Serializer\SerializerAbstract;
-
-/**
+/*
  * Create a new Serializer in your project
  * @see http://stackoverflow.com/questions/41723858/laravel-dingo-api-pagination-custom-root-key
  */

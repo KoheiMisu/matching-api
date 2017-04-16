@@ -19,5 +19,10 @@
         <exec command="vendor/bin/parallel-lint  --exclude vendor ." logoutput="true" />
     </target>
 
-    <target name="build" depends="prepare, php-cs-fixer, syntaxCheck" />
+    <!-- phpUnit -->
+    <target name="phpunit">
+        <exec command="vendor/bin/phpunit app/Application/Tests/" logoutput="true" />
+    </target>
+
+    <target name="build" depends="prepare, php-cs-fixer, syntaxCheck, phpunit" />
 </project>

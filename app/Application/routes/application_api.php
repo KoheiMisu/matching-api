@@ -10,18 +10,33 @@ $api = app('Dingo\Api\Routing\Router');
 /*
  * authentication
  */
-$api->version('v1', ['prefix' => 'api/v1', 'namespace' => 'App\Application\Http\Controllers\Auth'], function ($api) {
-    $api->post('/auth/fb_login', 'AuthController@storeFbUserData');
-});
+$api->version('v1',
+    [
+        'prefix'    => 'api/v1',
+        'namespace' => 'App\Application\Http\Controllers\Auth',
+    ], function ($api) {
+        $api->post('/auth/fb_login',
+            [
+                'as'   => 'auth.fb_login',
+                'uses' => 'AuthController@storeFbUserData',
+            ]
+        );
+    });
 
 $api->version('v1',
     [
         'prefix'     => 'api/v1',
         'namespace'  => 'App\Application\Http\Controllers\V1',
-        'middleware' => ['cors', 'api.auth', 'bindings'],
+        'middleware' => ['cors', 'api.auth', 'bindings', 'jwt.test'],
     ],
     function ($api) {
-        $api->get('/auth/authenticated_user', 'UserController@getAuthenticatedUser');
+        $api->get('/auth/authenticated_user',
+            [
+                'as'   => 'auth.get_user',
+                'uses' => 'UserController@getAuthenticatedUser',
+            ]
+        );
+
         $api->resource('users', 'UserController');
         $api->resource('userProfiles', 'UserProfileController');
         $api->resource('userPermissions', 'UserPermissionController'); //modelの名前に合わせないとbindingsが動かない

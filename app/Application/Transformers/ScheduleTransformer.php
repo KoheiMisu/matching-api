@@ -8,7 +8,7 @@ use App\Models\Schedule;
 class ScheduleTransformer extends TransformerAbstract
 {
     /**
-     * @param Schedule $schedules
+     * @param Schedule $schedule
      *
      * @return array
      */

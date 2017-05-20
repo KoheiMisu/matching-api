@@ -52,5 +52,13 @@ class UserTableSeeder extends Seeder
             'fb_name' => 'not_profileUSer',
             'fb_id'   => 'not_profileUSer',
         ]);
+
+        /*
+         * アプリで使用されるユーザー(id = 6)
+         */
+        factory(\App\Models\User::class)->create([
+            'fb_name' => 'Kohei Misu',
+            'fb_id'   => '382155712150795',
+        ]);
     }
 }

@@ -16,7 +16,7 @@ class CreateUserPermissionTable extends Migration
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
             //代表は初期チーム登録時に紐づくチームがないため、null許可
             $table->integer('team_id')->foreign('team_id')->references('id')->on('team')->nullable();
-            $table->enum('type', ['captain', 'schedule', 'team']);
+            $table->enum('type', ['captain', 'schedule', 'team'])->comment('captain, schedule, team');
             $table->softDeletes();
             $table->timestamps();
         });

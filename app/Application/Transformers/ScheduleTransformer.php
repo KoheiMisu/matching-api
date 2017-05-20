@@ -15,14 +15,13 @@ class ScheduleTransformer extends TransformerAbstract
     public function transform(Schedule $schedule)
     {
         return [
-            'category' => [
-                'name' => $schedule->category->category_name,
-            ],
+            'scheduleId' => $schedule->id,
+            'categoryName' => $schedule->category->category_name,
             'scope'      => $schedule->scope,
             'location'   => $schedule->location,
             'memo'       => $schedule->memo,
-            'start_time' => $schedule->start_time->toDateTimeString(),
-            'end_time'   => $schedule->end_time->toDateTimeString(),
+            'startTime' => $schedule->start_time->format('Y/m/d h:i'),
+            'endTime'   => $schedule->end_time->format('Y/m/d h:i'),
         ];
     }
 }

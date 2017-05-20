@@ -36,6 +36,12 @@ class ScheduleRepository extends BaseRepository implements BulkOperateInterface
      */
     public function findByUserBelongsToTeam(Collection $collection)
     {
-        return $this->findWhereIn('team_id', $collection->all());
+        /**
+         * @Todo scopeを使って、いちいちorderBy書くの辞めたい
+         */
+
+        return $this
+            ->orderBy('start_time')
+            ->findWhereIn('team_id', $collection->all());
     }
 }

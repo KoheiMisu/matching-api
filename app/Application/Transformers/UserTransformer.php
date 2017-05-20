@@ -16,11 +16,14 @@ class UserTransformer extends TransformerAbstract
      */
     public function transform(User $user)
     {
+        $this->injectPermission($user);
+
         if (!$user->hasProfile()) {
             return [
                 'userId'  => $user->id,
-                'fb_name' => $user->fb_name,
+                'fbName' => $user->fb_name,
                 'profile' => null,
+                'hasProfile' => $user->hasProfile(),
             ];
         }
 
@@ -28,13 +31,20 @@ class UserTransformer extends TransformerAbstract
             'userId'     => $user->id,
             'fbName'     => $user->fb_name,
             'hasProfile' => $user->hasProfile(),
-            'profile'    => [
-                'name'    => $user->userProfile->name,
-                'college' => [
-                    'name' => $user->userProfile->college->name,
-                ],
-                'grade' => $user->userProfile->grade,
-            ],
+            'profileName'    => $user->userProfile->name,
+            'college' => $user->userProfile->college->name,
+            'grade' => $user->userProfile->grade,
         ];
+    }
+
+    private function injectPermission(User $user)
+    {
+        $team = [];
+
+        foreach ($user->userPermission as $permission) {
+
+        }
+
+        return $team;
     }
 }

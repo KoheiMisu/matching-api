@@ -16,6 +16,7 @@ class TeamRequestTransformer extends TransformerAbstract
     public function transform(TeamRequest $teamRequest, Collection $items)
     {
         $response = [];
+
         foreach ($items as $item) {
             $response[] = [
                 'user' => [

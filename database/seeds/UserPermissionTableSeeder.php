@@ -20,5 +20,17 @@ class UserPermissionTableSeeder extends Seeder
             'team_id' => null,
             'type'    => 'captain',
         ]);
+
+        factory(\App\Models\UserPermission::class)->create([
+            'user_id' => 6,
+            'team_id' => null,
+            'type'    => 'captain',
+        ]);
+
+        factory(\App\Models\UserPermission::class)->create([
+            'user_id' => 6,
+            'team_id' => 2,
+            'type'    => 'schedule',
+        ]);
     }
 }

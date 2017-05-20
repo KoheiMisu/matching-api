@@ -16,17 +16,15 @@ class TeamTransformer extends TransformerAbstract
     {
         return [
             'name'                 => $team->name,
-            'profile_image_path'   => $team->profile_image_path,
-            'practice_location'    => $team->practice_location,
-            'practice_day_of_week' => $team->practice_day_of_week,
+            'profileImagePath'   => $team->profile_image_path,
+            'practiceLocation'    => $team->practice_location,
+            'practiceDayOfWeek' => $team->practice_day_of_week,
             'memo'                 => $team->memo,
             'people'               => $team->people,
-            'gender_ratio'         => $team->gender_ratio,
-            'drinking_ratio'       => $team->drinking_ratio,
+            'genderRatio'         => $team->gender_ratio,
+            'drinkingRatio'       => $team->drinking_ratio,
             'seriousness'          => $team->seriousness,
-            'college'              => [
-                'name' => $team->college->name,
-            ],
+            'college'              => $team->college->name,
         ];
     }
 }
